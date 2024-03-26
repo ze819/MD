@@ -1,5 +1,6 @@
 let handler = async (m, { conn, text }) => {
-    if (!text) throw 'No Text';
+    let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
+    if (!text) throw '*نسيت نص يرجى كتابه اسمك*';
   
     const avatar = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/2d2899be76e41d860a68b.jpg');
     const displayName = conn.getName(m.sender);
@@ -10,7 +11,7 @@ let handler = async (m, { conn, text }) => {
   
     const url = `https://some-random-api.com/canvas/misc/tweet?displayname=${encodeURIComponent(displayName)}&username=${encodeURIComponent(username)}&avatar=${encodeURIComponent(avatar)}&comment=${encodeURIComponent(text)}&replies=${encodeURIComponent(replies)}&retweets=${encodeURIComponent(retweets)}&theme=${encodeURIComponent(theme)}`;
   
-    conn.sendFile(m.chat, url, 'tweet.png', '*𝐿𝑈𝐹𝐹𝑌-𝐵𝛩𝑇*',m);
+    conn.sendFile(m.chat, url, 'tweet.png', '*𝐿𝑈𝐹𝐹𝑌-𝐵𝛩𝑇*\n*967733707084 مطوري*',fkontak,m);
   };
   
   handler.help = ['tweet <comment>'];
