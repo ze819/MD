@@ -5,8 +5,9 @@ import fbDownloader from 'fb-downloader-scrapper';
 import {facebook} from '@xct007/frieren-scraper';
 import axios from 'axios';
 const handler = async (m, {conn, args, command, usedPrefix}) => {
-  if (!args[0]) throw `_*< DESCARGAS - FACEBOOK />*_\n\n*[ 🌸 ] هاذا الامر لتحميل من فيسبوك*\n\n*مثال .فيسبوك${usedPrefix + command} https://fb.watch/fOTpgn6UFQ/_`;
-  if (!args[0].match(/www.facebook.com|fb.watch/g)) throw `*🌸𝑀𝐴𝐾𝐼𝑀𝐴-𝐵𝛩𝑇🌸*\n\n*[ 🌸 ]هاذا الامر لتحميل من فيسبوك*\n\n*[ 💡 ] مثال:* ${usedPrefix + command} https://fb.watch/fOTpgn6UFQ/_`;
+let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
+  if (!args[0]) throw `_*< DESCARGAS - FACEBOOK />*_\n\n*[ 🌸 ] هاذا الامر لتحميل من فيسبوك*\n\n*مثال*${usedPrefix + command} https://fb.watch/fOTpgn6UFQ/_`;
+  if (!args[0].match(/www.facebook.com|fb.watch/g)) throw `*🌸𝑀𝐴𝐾𝐼𝑀𝐴-𝐵𝛩𝑇🌸*\n\n*[ 🌸 ]هاذا الامر لتحميل من فيسبوك*\n\n*[ 🌸 ] مثال:* ${usedPrefix + command} https://fb.watch/fOTpgn6UFQ/_`;
   try {
     await m.reply(`*انتضر لحضه جار جلب الفيديو*\n\n*🌸𝑀𝐴𝐾𝐼𝑀𝐴-𝐵𝛩𝑇🌸*`);
     const d2ata = await facebook.v1(args[0]);
