@@ -92,7 +92,6 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	if (!text) throw tee;
 	let rr = `https://api.lolhuman.xyz/api/ephoto1/freefire?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
 	conn.sendFile(m.chat, rr, 'logo.png', `✅ Result`, m);
-	m.react(done);
 	break;
 
 	  default:
