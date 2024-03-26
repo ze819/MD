@@ -1,6 +1,6 @@
 let handler = async (m, { conn, text }) => {
     let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
-    if (!text) throw '*نسيت النص يرجي كتابه نص او اسمك'
+    if (!text) throw '*نسيت النص يرجي كتابه نص او اسمك*'
     conn.sendFile(m.chat, global.API('https://some-random-api.com', '/canvas/misc/youtube-comment', {
     avatar: await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/2d2899be76e41d860a68b.jpg'),
     comment: text,
@@ -9,5 +9,5 @@ let handler = async (m, { conn, text }) => {
     }
     handler.help = ['ytcomment <comment>']
     handler.tags = ['maker'] 
-    handler.command = /^(تويت|ب8|بروفايل8|بروفايلي8)$/i
+    handler.command = /^(تويت2|ب8|بروفايل8|بروفايلي8)$/i
     export default handler
