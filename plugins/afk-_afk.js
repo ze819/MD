@@ -77,7 +77,7 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	if (!text) throw tee;
 	let randu = `https://api.lolhuman.xyz/api/ephoto1/avatardota?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
 	conn.sendFile(m.chat, randu, 'logo.png', `✅ Result`, m);
-	m.react(done);
+	
 	break;
 	case 'gfx11': 
 	if (!text) throw too;
@@ -86,7 +86,7 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	let od = `https://api.lolhuman.xyz/api/ephoto2/codwarzone?apikey=${lolkeysapi}&text1=${encodeURIComponent(g.trim())}&text2=${encodeURIComponent(h.trim())}`;
 	conn.sendFile(m.chat, od, 'logo.png', `✅ Result`, m);
 	
-	m.react(done);
+	
 	break 
 	case 'gfx12': 
 	if (!text) throw tee;
