@@ -5,11 +5,11 @@ let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status
     let pp = await conn.profilePictureUrl(who, 'image').catch(_ => './Guru.jpg')
     conn.sendFile(m.chat, global.API('https://some-random-api.com', '/canvas/overlay/wasted', {
       avatar: pp, 
-    }), 'waste.png', `*تم يا ${name}*\n\n*𝐋𝐔𝐅𝐅𝐘-𝐁𝐎𝐓*`,fkontak)
+    }), 'waste.png', `*تم يا ${name}*\n\n*𝐋𝐔𝐅𝐅𝐘-𝐁𝐎𝐓*`,fkontak ,m)
   }
   
   handler.help = ['waste @user']
   handler.tags = ['fun']
-  handler.command = ['1بروفايل'] 
+  handler.command = ['بروفايل'] 
   
   export default handler
