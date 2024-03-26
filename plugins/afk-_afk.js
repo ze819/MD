@@ -10,6 +10,6 @@ let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status
   
   handler.help = ['waste @user']
   handler.tags = ['fun']
-  handler.command = ['بروفايل'] 
+  handler.command = ['بروفايل1'] 
   
   export default handler
