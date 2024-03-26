@@ -28,20 +28,20 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 		if (!text) throw tee;
 		let cp = `https://api.caliph.biz.id/api/rem?nama=${encodeURIComponent(text.trim())}&apikey=caliphkey`;
 		conn.sendFile(m.chat, cp, 'logo.png', `✅ Result`, m);
-		m.react(done);
+		
 		break;
 		
 	  case 'gfx4': 
 		if (!text) throw tee;
 		let gandu = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(text)}&apikey=caliphkey`;
 		conn.sendFile(m.chat, gandu, 'logo.png', `✅ Result`, m);
-		m.react(done);
+		
 		break;
 		case 'gfx5':
     if (!text) throw tee
     const apiUrll = `https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
     conn.sendFile(m.chat, apiUrll, 'logo.png', '✅ Result', m);
-    m.react('✅');
+    
     break;
 
 	case 'gfx6': 
