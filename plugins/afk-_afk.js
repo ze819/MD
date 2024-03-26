@@ -5,7 +5,7 @@ let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status
   let pp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://telegra.ph/file/6aac08396f9d8e9f2f7e3.jpg')
   conn.sendFile(m.chat, global.API('https://some-random-api.com', '/canvas/overlay/gay', {
     avatar: pp, 
-  }), 'gay.png', `*هل انت 🏳‍🌈 يا${name}\n\n*🌸𝑀𝐴𝐾𝐼𝑀𝐴-𝐵𝛩𝑇🌸*`,fkontak ,m)
+  }), 'gay.png', `*هــل انــت 🏳‍🌈 يــا ${name}*\n\n*🌸𝑀𝐴𝐾𝐼𝑀𝐴-𝐵𝛩𝑇🌸*`,fkontak ,m)
 }
 
 handler.help = ['gay @user']
