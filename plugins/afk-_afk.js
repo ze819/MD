@@ -11,7 +11,7 @@ let handler = async (m, { conn, text }) => {
   
     const url = `https://some-random-api.com/canvas/misc/tweet?displayname=${encodeURIComponent(displayName)}&username=${encodeURIComponent(username)}&avatar=${encodeURIComponent(avatar)}&comment=${encodeURIComponent(text)}&replies=${encodeURIComponent(replies)}&retweets=${encodeURIComponent(retweets)}&theme=${encodeURIComponent(theme)}`;
   
-    conn.sendFile(m.chat, url, 'tweet.png', '*𝐿𝑈𝐹𝐹𝑌-𝐵𝛩𝑇*\n*967733707084 مطوري*',fkontak,m);
+    conn.sendFile(m.chat, url, 'tweet.png', '*ا𝐿𝑈𝐹𝐹𝑌-𝐵𝛩𝑇*\n*مـــطـــوري*\n*967733707084*',fkontak,m);
   };
   
   handler.help = ['tweet <comment>'];
