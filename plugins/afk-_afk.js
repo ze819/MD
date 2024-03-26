@@ -20,7 +20,8 @@ let handler = async (m, { conn, usedPrefix, command}) => {
     let uptime = clockString(_uptime)
 let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 if (!(who in global.db.data.users)) throw `✳️ لم يتم العثور على المستخدم في قاعدة البيانات`
-let vn = './media/Madara.mp3'
+//let vn = './media/Madara.mp3'
+const img = './Menu2.jpg';
 //let pp = await conn.profilePictureUrl(who, 'image').catch(_ => './src/avatar_contact.png')
 let user = global.db.data.users[who]
 let {money, joincount} = global.db.data.users[m.sender];
@@ -37,7 +38,7 @@ let readMore = more.repeat(850)
 let taguser = '@' + m.sender.split("@s.whatsapp.net")[0]
 global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remoteJid: 'status@broadcast' }, message: { contactMessage: { displayName: `${name}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}
     
-    let vn = './Menu.png'
+    
     const str = `
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢
 *🐉✬⃝╿↵ مرحــبـا ⌊${name}⌉*
@@ -244,9 +245,9 @@ global.fcontact = { key: { fromMe: false, participant: `0@s.whatsapp.net`, remot
 │✮ ⃟🚀❯ .بنج
 │✮ ⃟👾❯ .بوت
 ⟣┈┈┈┈┈┈⟢┈┈┈⟣┈┈┈┈┈┈┈⟢`
-    const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: vn }, caption: str.trim(),  gifPlayback: true,
-  { quoted: fcontact })
-    
+    const { result, key, timeout } = await conn.sendMessage(m.chat, { video: { url: menuvid }, caption: str.trim(),  gifPlayback: true,
+  gifAttribution: 0}, { quoted: fcontact })
+
 
 }
 handler.help = ['main']
@@ -254,6 +255,7 @@ handler.tags = ['group']
 handler.command = ['الاوامر', 'المهام','اوامر','الأوامر'] 
 
 export default handler
+
 function clockString(ms) {
     let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000)
     let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
