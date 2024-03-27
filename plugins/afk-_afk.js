@@ -1,6 +1,6 @@
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-	let tee = `✳️ Enter a short text\n\n📌 Example  : *${usedPrefix + command}* GURU`
-	let too = `✳️ Separate the text with a *+* \n\n📌 Example : \n*${usedPrefix + command}* GURU *+* BOT`
+	let tee = `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*\n\n*مثــال:*${usedPrefix + command}*LUFFY*\n*بعض منها تدعم اللغه العربيه*`
+	let too = `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*\n\nمثال:*\n*${usedPrefix + command}* LUFFY *+* BOT*`
 	
 	
 	
