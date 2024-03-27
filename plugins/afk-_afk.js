@@ -31,20 +31,20 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 		
 		break;
 		
-	  case 'ل4': 
+	  case 'لxxx': 
 		if (!text) throw tee;
 		let gandu = `https://api.caliph.biz.id/api/textpro/matrix?text=${encodeURIComponent(text)}&apikey=caliphkey`;
 		conn.sendFile(m.chat, gandu, 'logo.png', `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*`, m);
 		
 		break;
-		case 'ل5':
+		case 'xxل':
     if (!text) throw tee
     const apiUrll = `https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
     conn.sendFile(m.chat, apiUrll, 'logo.png', '*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*', m);
     
     break;
 
-	case 'ل6': 
+	case 'لxxx': 
 	if (!text) throw too
 	if (!text.includes('+')) throw too  
 	let [c, d] = text.split`+`   
@@ -52,7 +52,7 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	conn.sendFile(m.chat, apiUrl, 'logo.png', `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*`, m)
 	
 	break 
-	case 'ل7': 
+	case 'ل4': 
 	if (!text) throw too;
 	if (!text.includes('+')) throw too;
 	let [e, f] = text.split('+');
@@ -61,25 +61,25 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	
 	
 	break 
-	case 'ل8': 
+	case 'ل5': 
 	if (!text) throw tee;
 	let rand = `https://api.lolhuman.xyz/api/ephoto1/anonymhacker?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
 	conn.sendFile(m.chat, rand, 'logo.png', `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*`, m);
 	
 	break;
-	case 'ل9': 
+	case 'ل6': 
 	if (!text) throw tee;
 	let randi = `https://api.lolhuman.xyz/api/ephoto1/avatarlolnew?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
 	conn.sendFile(m.chat, randi, 'logo.png', `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*`, m);
 	
 	break;
-	case 'ل10': 
+	case 'ل7': 
 	if (!text) throw tee;
 	let randu = `https://api.lolhuman.xyz/api/ephoto1/avatardota?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
 	conn.sendFile(m.chat, randu, 'logo.png', `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*`, m);
 	
 	break;
-	case 'ل11': 
+	case 'ل8': 
 	if (!text) throw too;
 	if (!text.includes('+')) throw too;
 	let [g, h] = text.split('+');
@@ -88,7 +88,7 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	
 	
 	break 
-	case 'ل12': 
+	case 'ل9': 
 	if (!text) throw tee;
 	let rr = `https://api.lolhuman.xyz/api/ephoto1/freefire?apikey=${lolkeysapi}&text=${encodeURIComponent(text)}`;
 	conn.sendFile(m.chat, rr, 'logo.png', `*🍁𝐌𝐎𝐍𝐊𝐄𝐘 𝐃 𝐋𝐔𝐅𝐅𝐘١⁵🍁*`, m);
@@ -98,9 +98,9 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 	} 
   };
   
-  handler.help = ['ل1', 'ل2', 'ل3', 'ل4', 'ل5', 'ل6', 'ل7', 'ل8', 'ل9', 'ل10', 'ل11', 'ل12'];
+  handler.help = ['ل1', 'ل2', 'ل3', 'للل76', 'لل76ل5', '68ةزل6', 'ل4', 'ل5', 'ل6', 'ل7', 'ل8', 'ل9'];
   handler.tags = ['maker'];
-  handler.command = /^(ل1|ل2|ل3|ل4|ل5|ل6|ل7|ل8|ل9|ل10|ل11|ل12)$/i;
+  handler.command = /^(ل1|ل2|ل3|ل0850|ل4|ل5|ل6|ل7|ل8|ل9|0ل2)$/i;
   handler.diamond = false;
   
   export default handler;
