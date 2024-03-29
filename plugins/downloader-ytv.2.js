@@ -17,8 +17,8 @@ let handler = async (m, { conn, text }) => {
   }
 
     let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
-    if (!(who in global.db.data.users)) throw '✳️ The user is not found in my database';
-     let userPfp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://cdn.jsdelivr.net/gh/Guru322/api@Guru/guru.jpg'); 
+    if (!(who in global.db.data.users)) throw '*المستخدم ليس في قاعده البيانات الخاصه بي*';
+     let userPfp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://telegra.ph/file/01942e650a8b6564e8aba.jpg'); 
     let user = global.db.data.users[who];
     let { name } = global.db.data.users[who];
 
@@ -61,7 +61,7 @@ if (!res.ok) {
 let json = await res.json();
 
 if (!json.result || !json.result.image) {
-  throw new Error('Unexpected response structure');
+  throw new Error('​​​​​​​​​​​​​​​​​​​​​*حصل خطاء غير متوقع');
 }
 function randomId() {
 	return Math.floor(100000 + Math.random() * 900000);
@@ -87,7 +87,7 @@ let bufferImage = Buffer.from(json.result.image, 'base64');
       await conn.sendMessage(m.chat, await sticker.toMessage(), { quoted: m });
     } catch (stickerError) {
       console.error('Error sending sticker:', stickerError);
-      m.reply('Error sending sticker. Sending image instead.');
+      m.reply('*حدث خطأ أثناء إرسال الملصق. إرسال صوره بدلا من ذلك*');
       
       await conn.sendFile(m.chat, tempImagePath, 'quote.png', 'Here is the quote image:', m);
     }
@@ -105,6 +105,6 @@ let bufferImage = Buffer.from(json.result.image, 'base64');
 
 handler.help = ['quote'];
 handler.tags = ['fun'];
-handler.command = ['quote'];
+handler.command = ['ستك'];
 
 export default handler;
