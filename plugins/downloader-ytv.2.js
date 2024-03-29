@@ -1,96 +1,111 @@
 import fetch from 'node-fetch';
-import {sticker, addExif} from '../lib/sticker.js';
-import {Sticker} from 'wa-sticker-formatter';
-const handler = async (m, {conn, text, args, usedPrefix, command}) => {
-  if (!text) throw `*[❗]تحويل اسمك الى استيكر ضوئي*\n\n*—◉مثال:*\n*◉ ${usedPrefix + command} لوفي*`;
-  const teks = encodeURI(text);
+import { Sticker, createSticker, StickerTypes } from "wa-sticker-formatter";
 
-  if (command == 'س1') {
-    const a1 = await (await fetch(`https://api.erdwpe.com/api/maker/attp?text=${teks}`)).buffer();
-    const a2 = await createSticker(a1, false, global.packname, global.author);
-    conn.sendFile(m.chat, a2, 'sticker.webp', '', m, {asSticker: true});
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+
+let handler = async (m, { conn, text }) => {
+  
+
+  try {
+   if (!text && !(m.quoted && m.quoted.text)) {
+    throw `Please provide some text or quote a message to get a response.`;
+  }
+    if (!text && m.quoted && m.quoted.text) {
+    text = m.quoted.text;
   }
 
-  if (command == 'س2') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
-  }
+    let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
+    if (!(who in global.db.data.users)) throw '✳️ The user is not found in my database';
+     let userPfp = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://cdn.jsdelivr.net/gh/Guru322/api@Guru/guru.jpg'); 
+    let user = global.db.data.users[who];
+    let { name } = global.db.data.users[who];
 
-  if (command == 'س3') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/attp2?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
-  }
+    m.react(rwait);
+   
 
-  if (command == 'س4') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp6?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
-  }
+    let quoteJson = {
+      type: "quote",
+      format: "png",
+      backgroundColor: "#FFFFFF",
+      width: 1800,
+      height: 200, // Adjust the height value as desired
+      scale: 2,
+      messages: [
+        {
+          entities: [],
+          avatar: true,
+          from: {
+            id: 1,
+            name: name,
+            photo: {
+              url: userPfp,
+            },
+          },
+          text: text,
+          replyMessage: {},
+        },
+      ],
+    };
 
-  if (command == 'س5') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp5?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
-  }
+   let res = await fetch('https://bot.lyo.su/quote/generate', {
+  method: 'POST',
+  body: JSON.stringify(quoteJson),
+  headers: { 'Content-Type': 'application/json' },
+});
 
-  if (command == 'س6') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp3?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
-  }
+if (!res.ok) {
+  throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+}
 
-  if (command == 'س7') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp2?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
-  }
+let json = await res.json();
 
-  if (command == 'س8') {
-    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+if (!json.result || !json.result.image) {
+  throw new Error('Unexpected response structure');
+}
+function randomId() {
+	return Math.floor(100000 + Math.random() * 900000);
+}
+
+let bufferImage = Buffer.from(json.result.image, 'base64');
+
+
+    
+    let tempImagePath = path.join(os.tmpdir(), 'tempImage.png');
+    fs.writeFileSync(tempImagePath, bufferImage);
+    let sticker = new Sticker(tempImagePath, {
+      pack: global.packname,
+      author: name,
+      type: StickerTypes.FULL,
+      categories: ["🤩", "🎉"],
+      id: randomId(),
+      quality: 100,
+      background: "#00000000",
+    });
+    
+    try {
+      await conn.sendMessage(m.chat, await sticker.toMessage(), { quoted: m });
+    } catch (stickerError) {
+      console.error('Error sending sticker:', stickerError);
+      m.reply('Error sending sticker. Sending image instead.');
+      
+      await conn.sendFile(m.chat, tempImagePath, 'quote.png', 'Here is the quote image:', m);
+    }
+
+
+    fs.unlinkSync(tempImagePath);
+
+    m.react("🤡");
+
+  } catch (e) {
+    console.error(e);
+    m.react("😭");
   }
 };
-handler.command = handler.help = ['س1', 'س2', 'س3', 'س4', 'س5', 'س6', 'س7', 'س8'];
-handler.tags = ['sticker'];
-export default handler;
 
-async function createSticker(img, url, packName, authorName, quality) {
-  const stickerMetadata = {type: 'full', pack: packName, author: authorName, quality};
-  return (new Sticker(img ? img : url, stickerMetadata)).toBuffer();
-}
-async function mp4ToWebp(file, stickerMetadata) {
-  if (stickerMetadata) {
-    if (!stickerMetadata.pack) stickerMetadata.pack = '‎';
-    if (!stickerMetadata.author) stickerMetadata.author = '‎';
-    if (!stickerMetadata.crop) stickerMetadata.crop = false;
-  } else if (!stickerMetadata) {
-    stickerMetadata = {pack: '‎', author: '‎', crop: false};
-  }
-  const getBase64 = file.toString('base64');
-  const Format = {file: `data:video/mp4;base64,${getBase64}`, processOptions: {crop: stickerMetadata?.crop, startTime: '00:00:00.0', endTime: '00:00:7.0', loop: 0,
-  }, stickerMetadata: {...stickerMetadata},
-  sessionInfo: {
-    WA_VERSION: '2.2106.5',
-    PAGE_UA: 'WhatsApp/2.2037.6 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36',
-    WA_AUTOMATE_VERSION: '3.6.10 UPDATE AVAILABLE: 3.6.11',
-    BROWSER_VERSION: 'HeadlessChrome/88.0.4324.190',
-    OS: 'Windows Server 2016',
-    START_TS: 1614310326309,
-    NUM: '6247',
-    LAUNCH_TIME_MS: 7934,
-    PHONE_VERSION: '2.20.205.16',
-  },
-  config: {
-    sessionId: 'session',
-    headless: true,
-    qrTimeout: 20,
-    authTimeout: 0,
-    cacheEnabled: false,
-    useChrome: true,
-    killProcessOnBrowserClose: true,
-    throwErrorOnTosBlock: false,
-    chromiumArgs: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--aggressive-cache-discard',
-      '--disable-cache',
-      '--disable-application-cache',
-      '--disable-offline-load-stale-cache',
-      '--disk-cache-size=0',
-    ],
-    executablePath: 'C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe',
-    skipBrokenMethodsCheck: true,
-    stickerServerEndpoint: true,
-  }};
-  const res = await fetch('https://sticker-api.openwa.dev/convertMp4BufferToWebpDataUrl', {method: 'post', headers: {'Accept': 'application/json, text/plain, /', 'Content-Type': 'application/json;charset=utf-8'}, body: JSON.stringify(Format)});
-  return Buffer.from((await res.text()).split(';base64,')[1], 'base64');
-}
+handler.help = ['quote'];
+handler.tags = ['fun'];
+handler.command = ['quote'];
+
+export default handler;
