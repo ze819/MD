@@ -22,8 +22,7 @@ let handler = async (m, { conn, text }) => {
     let user = global.db.data.users[who];
     let { name } = global.db.data.users[who];
 
-    m.react(rwait);
-   
+    
 
     let quoteJson = {
       type: "quote",
@@ -96,11 +95,11 @@ let bufferImage = Buffer.from(json.result.image, 'base64');
 
     fs.unlinkSync(tempImagePath);
 
-    m.react("🤡");
+    
 
   } catch (e) {
     console.error(e);
-    m.react("😭");
+    
   }
 };
 
