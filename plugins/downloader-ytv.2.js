@@ -13,8 +13,8 @@ let handler = async (m, { conn, text }) => {
     throw `Please provide some text or quote a message to get a response.`;
   }
     if (!text && m.quoted && m.quoted.text) {
-    text = m.quoted.text;
-  }
+    text = m.quoted.text
+    } else throw "*مثال*\n*ستك ماكيما🌼*"
 
     let who = m.quoted ? m.quoted.sender : m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
     if (!(who in global.db.data.users)) throw '*المستخدم ليس في قاعده البيانات الخاصه بي*';
@@ -84,12 +84,13 @@ let bufferImage = Buffer.from(json.result.image, 'base64');
     });
     
     try {
-      await conn.sendMessage(m.chat, await sticker.toMessage(), { quoted: m });
+      await conn.sendMessage(m.chat, await sticker.toMessage(),true,  { contextInfo: { forwardingScore: 200, isForwarded: false, externalAdReply:{ showAdAttribution: false, title: wm, body: `【𝐇𝐀𝐋𝐌-𝐏𝐎𝐑𝐒𝐇𝐄】١⁵`, mediaType: 2, sourceUrl: `wa.me/967733707084`, thumbnail: imagen1}}}, { quoted: m })
+}
     } catch (stickerError) {
       console.error('Error sending sticker:', stickerError);
       m.reply('*حدث خطأ أثناء إرسال الملصق. إرسال صوره بدلا من ذلك*');
       
-      await conn.sendFile(m.chat, tempImagePath, 'quote.png', 'Here is the quote image:', m);
+      await conn.sendFile(m.chat, tempImagePath, 'quote.png', '*اين هي صوره*',fkontak ,m);
     }
 
 
@@ -108,3 +109,13 @@ handler.tags = ['fun'];
 handler.command = ['ستك'];
 
 export default handler;
+
+
+
+
+
+
+
+
+
+
