@@ -1,31 +1,96 @@
-import {youtubedl, youtubedlv2} from '@bochilteam/scraper';
 import fetch from 'node-fetch';
-const handler = async (m, {conn, args}) => {
-  if (!args[0]) throw '*[❗𝐈𝐍𝐅𝐎❗] 𝙸𝙽𝚂𝙴𝚁𝚃𝙴 𝙴𝙻 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙼𝙰𝚂 𝙴𝙻 𝙴𝙽𝙻𝙰𝙲𝙴 / 𝙻𝙸𝙽𝙺 𝙳𝙴 𝚄𝙽 𝚅𝙸𝙳𝙴𝙾 𝙳𝙴 𝚈𝙾𝚄𝚃𝚄𝙱𝙴*';
-  await m.reply(`*_⏳Sᴇ ᴇsᴛᴀ ᴘʀᴏᴄᴇsᴀɴᴅᴏ Sᴜ ᴠɪᴅᴇᴏ...⏳_*\n\n*◉ Sɪ Sᴜ ᴠɪᴅᴇᴏ ɴᴏ ᴇs ᴇɴᴠɪᴀᴅᴏ, ᴘʀᴜᴇʙᴇ ᴄᴏɴ ᴇʟ ᴄᴏᴍᴀɴᴅᴏ #playdoc ᴏ #play.2 ᴏ #ytmp4doc ◉*`);
-  try {
-    const qu = args[1] || '360';
-    const q = qu + 'p';
-    const v = args[0];
-    const yt = await youtubedl(v).catch(async (_) => await youtubedlv2(v));
-    const dl_url = await yt.video[q].download();
-    const ttl = await yt.title;
-    const size = await yt.video[q].fileSizeH;
-    const cap = `*◉—⌈📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥⌋—◉*\n❏ *𝚃𝙸𝚃𝚄𝙻𝙾:* ${ttl}\n❏ *𝙿𝙴𝚂𝙾:* ${size}`.trim();
-    await await conn.sendMessage(m.chat, {document: {url: dl_url}, caption: cap, mimetype: 'video/mp4', fileName: ttl + `.mp4`}, {quoted: m});
-  } catch {
-    try {
-      const lolhuman = await fetch(`https://api.lolhuman.xyz/api/ytvideo2?apikey=${lolkeysapi}&url=${args[0]}`);
-      const lolh = await lolhuman.json();
-      const n = lolh.result.title || 'error';
-      const n2 = lolh.result.link;
-      const n3 = lolh.result.size;
-      const cap2 = `*◉—⌈📥 𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐃𝐋 📥⌋—◉*\n❏ *𝚃𝙸𝚃𝚄𝙻𝙾:* ${n}\n❏ *𝙿𝙴𝚂𝙾:* ${n3}`.trim();
-      await conn.sendMessage(m.chat, {document: {url: n2}, caption: cap2, mimetype: 'video/mp4', fileName: n + `.mp4`}, {quoted: m});
-    } catch {
-      await conn.reply(m.chat, '*[❗] 𝙴𝚁𝚁𝙾𝚁 𝙽𝙾 𝙵𝚄𝙴 𝙿𝙾𝚂𝙸𝙱𝙻𝙴 𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝚁 𝙴𝙻 𝚅𝙸𝙳𝙴𝙾*', m);
-    }
+import {sticker, addExif} from '../lib/sticker.js';
+import {Sticker} from 'wa-sticker-formatter';
+const handler = async (m, {conn, text, args, usedPrefix, command}) => {
+  if (!text) throw `*[❗]تحويل اسمك الى استيكر ضوئي*\n\n*—◉مثال:*\n*◉ ${usedPrefix + command} لوفي*`;
+  const teks = encodeURI(text);
+
+  if (command == 'س1') {
+    const a1 = await (await fetch(`https://api.erdwpe.com/api/maker/attp?text=${teks}`)).buffer();
+    const a2 = await createSticker(a1, false, global.packname, global.author);
+    conn.sendFile(m.chat, a2, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س2') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/attp?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س3') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/attp2?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س4') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp6?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س5') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp5?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س6') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp3?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س7') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp2?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
+  }
+
+  if (command == 'س8') {
+    conn.sendFile(m.chat, `https://api.lolhuman.xyz/api/ttp?apikey=${lolkeysapi}&text=${teks}`, 'sticker.webp', '', m, {asSticker: true});
   }
 };
-handler.command = /^ytmp4doc|ytvdoc|ytmp4.2|ytv.2$/i;
+handler.command = handler.help = ['س1', 'س2', 'س3', 'س4', 'س5', 'س6', 'س7', 'س8'];
+handler.tags = ['sticker'];
 export default handler;
+
+async function createSticker(img, url, packName, authorName, quality) {
+  const stickerMetadata = {type: 'full', pack: packName, author: authorName, quality};
+  return (new Sticker(img ? img : url, stickerMetadata)).toBuffer();
+}
+async function mp4ToWebp(file, stickerMetadata) {
+  if (stickerMetadata) {
+    if (!stickerMetadata.pack) stickerMetadata.pack = '‎';
+    if (!stickerMetadata.author) stickerMetadata.author = '‎';
+    if (!stickerMetadata.crop) stickerMetadata.crop = false;
+  } else if (!stickerMetadata) {
+    stickerMetadata = {pack: '‎', author: '‎', crop: false};
+  }
+  const getBase64 = file.toString('base64');
+  const Format = {file: `data:video/mp4;base64,${getBase64}`, processOptions: {crop: stickerMetadata?.crop, startTime: '00:00:00.0', endTime: '00:00:7.0', loop: 0,
+  }, stickerMetadata: {...stickerMetadata},
+  sessionInfo: {
+    WA_VERSION: '2.2106.5',
+    PAGE_UA: 'WhatsApp/2.2037.6 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36',
+    WA_AUTOMATE_VERSION: '3.6.10 UPDATE AVAILABLE: 3.6.11',
+    BROWSER_VERSION: 'HeadlessChrome/88.0.4324.190',
+    OS: 'Windows Server 2016',
+    START_TS: 1614310326309,
+    NUM: '6247',
+    LAUNCH_TIME_MS: 7934,
+    PHONE_VERSION: '2.20.205.16',
+  },
+  config: {
+    sessionId: 'session',
+    headless: true,
+    qrTimeout: 20,
+    authTimeout: 0,
+    cacheEnabled: false,
+    useChrome: true,
+    killProcessOnBrowserClose: true,
+    throwErrorOnTosBlock: false,
+    chromiumArgs: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--aggressive-cache-discard',
+      '--disable-cache',
+      '--disable-application-cache',
+      '--disable-offline-load-stale-cache',
+      '--disk-cache-size=0',
+    ],
+    executablePath: 'C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe',
+    skipBrokenMethodsCheck: true,
+    stickerServerEndpoint: true,
+  }};
+  const res = await fetch('https://sticker-api.openwa.dev/convertMp4BufferToWebpDataUrl', {method: 'post', headers: {'Accept': 'application/json, text/plain, /', 'Content-Type': 'application/json;charset=utf-8'}, body: JSON.stringify(Format)});
+  return Buffer.from((await res.text()).split(';base64,')[1], 'base64');
+}
